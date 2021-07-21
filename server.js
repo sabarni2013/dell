@@ -17,8 +17,6 @@ connection.connect(err => {
     else console.log(' database connected successfully');
 });
 app.post('/saveData',((req,res) => {
-   console.log(req.body);
-   console.log('enter post api....');
    let val = req.body;
    let sum = Number(val.firstNumber)+Number(val.secondNumber);
    connection.query('delete from calculator where id=1');
@@ -28,10 +26,9 @@ app.post('/saveData',((req,res) => {
    });
 }));
 app.get('/getData',(req,res) => {
-    console.log('enter get api....');
+    
     connection.query("SELECT  firstNumber,secondNumber, sum FROM calculator", function (err, result) {
     if (err) throw err;
-    console.log(result);
     res.send(result);
   });
 });

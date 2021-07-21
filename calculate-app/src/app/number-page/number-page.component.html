@@ -14,7 +14,7 @@
   <div class="form-group row">
     <label for="name">Second Number</label>
     <input type="text" id="secondNumber" class="form-control" formControlName="secondNumber" required
-      value="{{firstNumberVal}}">
+      value="{{secondNumberVal}}">
     <div class="alert alert-danger" *ngIf="secondNumber.errors && (secondNumber.dirty || secondNumber.touched)">
       <p *ngIf="secondNumber.errors.pattern" class="text-danger">Please enter number Only</p>
       <div *ngIf="firstNumber.errors?.required">secondNumber is required.</div>

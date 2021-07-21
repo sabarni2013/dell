@@ -21,9 +21,13 @@ export class NumberPageComponent implements OnInit {
     .set('Content-Type', 'application/json');
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.createForm();
+    
     this.profileForm.valueChanges
       .subscribe((changedObj: any) => {
-        this.disableBtn = this.profileForm.valid;
+
+        if(this.firstNumberVal.length > 0 && this.secondNumberVal.length > 0) {
+          this.disableBtn = true;
+        }  else this.disableBtn = this.profileForm.valid;
       });
   }
 
@@ -42,28 +46,28 @@ export class NumberPageComponent implements OnInit {
   }
   ngOnInit() {
     this.getData();
+   
   }
 
   get firstNumber() { return this.profileForm.get('firstNumber'); }
   get secondNumber() { return this.profileForm.get('secondNumber'); }
   onSubmit(value: any) {
     this.sum = Number(value.firstNumber) + Number(value.secondNumber);
-    this.http.post(this.REST_API_SERVER + '/saveData', { firstNumber: value.firstNumber, secondNumber: value.secondNumber }, {
+    this.http.post(this.REST_API_SERVER + '/saveData', { firstNumber: Number(value.firstNumber) || 0, secondNumber: Number(value.secondNumber) || 0 }, {
       headers: this.headers
     }).subscribe((data) => {
       console.log(data);
     });
   }
   getData() {
-    console.log('enter get data');
     this.http.get(this.REST_API_SERVER + '/getData', {
       headers: this.headers
     }).subscribe((data) => {
-      console.log(data);
       if(Object.keys(data).length > 0) {
         this.firstNumberVal = data[0].firstNumber;
         this.secondNumberVal = data[0].secondNumber;
         this.sum = data[0].sum;
+        this.disableBtn = true;
       }
       
 
