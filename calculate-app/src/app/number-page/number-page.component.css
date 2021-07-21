@@ -36,7 +36,7 @@
   .resultBox {
     display: block;
     padding: 1px;
-    margin: 10px 2px 0px 282px;
+    margin: 10px 2px 0px 0px;
     border: 1px solid;
     -webkit-box-shadow: 1px 1px 1px;
     box-shadow: 1px 1px 6px;
@@ -87,7 +87,7 @@
   .resultBox {
     display: block;
     padding: 1px;
-    margin: 10px 2px 0px 282px;
+    margin: 10px 2px 0px 0px;
     border: 1px solid;
     -webkit-box-shadow: 1px 1px 1px;
     box-shadow: 1px 1px 6px;

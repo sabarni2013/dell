@@ -41,6 +41,7 @@ export class NumberPageComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.getData();
   }
 
   get firstNumber() { return this.profileForm.get('firstNumber'); }
@@ -59,9 +60,12 @@ export class NumberPageComponent implements OnInit {
       headers: this.headers
     }).subscribe((data) => {
       console.log(data);
-      this.firstNumberVal = data[0].firstNumber;
-      this.secondNumberVal = data[0].secondNumber;
-      this.sum = data[0].sum;
+      if(Object.keys(data).length > 0) {
+        this.firstNumberVal = data[0].firstNumber;
+        this.secondNumberVal = data[0].secondNumber;
+        this.sum = data[0].sum;
+      }
+      
 
     })
   }
