@@ -17,8 +17,8 @@ export class NumberPageComponent implements OnInit {
   sum;
   private REST_API_SERVER = "http://localhost:8000";
   headers = new HttpHeaders()
-  .set('Authorization', 'my-auth-token')
-  .set('Content-Type', 'application/json');
+    .set('Authorization', 'my-auth-token')
+    .set('Content-Type', 'application/json');
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.createForm();
     this.profileForm.valueChanges
@@ -46,23 +46,23 @@ export class NumberPageComponent implements OnInit {
   get firstNumber() { return this.profileForm.get('firstNumber'); }
   get secondNumber() { return this.profileForm.get('secondNumber'); }
   onSubmit(value: any) {
-    this.sum = Number(value.firstNumber)+ Number(value.secondNumber);
-    this.http.post(this.REST_API_SERVER + '/saveData', {firstNumber: value.firstNumber, secondNumber: value.secondNumber}, {
+    this.sum = Number(value.firstNumber) + Number(value.secondNumber);
+    this.http.post(this.REST_API_SERVER + '/saveData', { firstNumber: value.firstNumber, secondNumber: value.secondNumber }, {
       headers: this.headers
-    }).subscribe((data)=>{
+    }).subscribe((data) => {
       console.log(data);
     });
   }
   getData() {
-    
-    this.http.post(this.REST_API_SERVER+'/getData', {
+    console.log('enter get data');
+    this.http.get(this.REST_API_SERVER + '/getData', {
       headers: this.headers
-    }).subscribe((data)=>{
-     
-        this.firstNumberVal = data[0].firstNumber;
-        this.secondNumberVal = data[0].secondNumber;
-        this.sum = data[0].sum;
-      
+    }).subscribe((data) => {
+      console.log(data);
+      this.firstNumberVal = data[0].firstNumber;
+      this.secondNumberVal = data[0].secondNumber;
+      this.sum = data[0].sum;
+
     })
   }
 
